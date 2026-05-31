@@ -8,6 +8,54 @@ class DetectionService:
     def __init__(self, db):
         self.db = db
         self.alert_service = AlertService(db)
+    
+    def evaluate_port_scan(
+        self,
+        event: SecurityEvent,
+        rule: DetectionRule,
+    ) -> bool | None:
+        if event.source_ip is None:
+            return None
+
+        if event.asset_id is None:
+            return None
+
+        if event.destination_port is None:
+            return None
+
+        window_start = event.occurred_at - timedelta(
+            minutes=rule.aggregation_window_minutes
+        )
+
+        destination_ports = (
+            self.db.query(SecurityEvent.destination_port)
+            .filter(SecurityEvent.organization_id == event.organization_id)
+            .filter(SecurityEvent.source_ip == event.source_ip)
+            .filter(SecurityEvent.asset_id == event.asset_id)
+            .filter(SecurityEvent.destination_port.isnot(None))
+            .filter(SecurityEvent.occurred_at >= window_start)
+            .filter(SecurityEvent.occurred_at <= event.occurred_at)
+            .distinct()
+            .count()
+        )
+
+        if destination_ports < rule.threshold:
+            return None
+
+        _, was_created = self.alert_service.create_or_update_alert(
+            event=event,
+            rule=rule,
+            title="Port scan activity detected",
+            description=(
+                f"{destination_ports} unique destination ports contacted "
+                f"within {rule.aggregation_window_minutes} minutes."
+            ),
+            severity=rule.severity,
+            risk_score=rule.risk_score,
+        )
+
+        return was_created
+
 
     def evaluate_failed_login(
         self,
@@ -81,7 +129,15 @@ class DetectionService:
                 if created is True:
                     alerts_created += 1
                 elif created is False:
-                    alerts_updated += 1        
+                    alerts_updated += 1 
+
+            if rule.rule_key == "port_scan_threshold":
+                created = self.evaluate_port_scan(event, rule)
+                
+                if created is True:
+                    alerts_created += 1
+                elif created is False:
+                    alerts_updated += 1               
 
         return {
             "alerts_created": alerts_created,
