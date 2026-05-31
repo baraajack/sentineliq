@@ -1,5 +1,17 @@
 import type { Alert } from "./types";
+import type { DetectionRule } from "./types";
 
+export async function getDetectionRules(): Promise<DetectionRule[]> {
+  const response = await fetch(`${API_BASE_URL}/api/detection-rules`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch detection rules");
+  }
+
+  return response.json();
+}
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://backend:8000";
