@@ -1,7 +1,7 @@
 import re
 from app.models.raw_log import RawLog
 from app.models.security_event import SecurityEvent
-
+from app.services.detection_service import DetectionService
 
 class IngestionService:
     def __init__(self, db):
@@ -90,10 +90,14 @@ class IngestionService:
         self.db.add(security_event)
         self.db.commit()
         self.db.refresh(security_event)
+        detection_result = DetectionService(self.db).evaluate_event(security_event)
+        
 
         return {
             "raw_log_id": raw_log.id,
             "security_event_id": security_event.id,
             "event_type": event_type,
             "severity": severity,
+            "alerts_created": detection_result["alerts_created"],
+            "alerts_updated": detection_result["alerts_updated"],
         }

@@ -15,3 +15,5 @@ class LogIngestionResponse(BaseModel):
     security_event_id: int
     event_type: str
     severity: str
+    alerts_created: int
+    alerts_updated: int
