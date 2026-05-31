@@ -5,6 +5,9 @@ from app.api.routes.log_sources import (
 )
 from app.api.routes.ingestion import router as ingestion_router
 from app.api.routes.events import router as events_router
+from app.api.routes.detection_rules import (
+    router as detection_rules_router,
+)
 
 app = FastAPI(
     title="SentinelIQ API",
@@ -15,8 +18,10 @@ app.include_router(log_sources_router)
 
 app.include_router(assets_router)
 
+
 app.include_router(ingestion_router)
 app.include_router(events_router)
+app.include_router(detection_rules_router)
 
 @app.get("/health")
 def health_check():
