@@ -7,6 +7,23 @@ class IngestionService:
     def __init__(self, db):
         self.db = db
 
+    def extract_destination_ip(self, message: str) -> str | None:
+        match = re.search(r"to (\d+\.\d+\.\d+\.\d+)", message)
+
+        if match:
+            return match.group(1)
+
+        return None
+
+
+    def extract_destination_port(self, message: str) -> int | None:
+        match = re.search(r"destination port (\d+)", message)
+
+        if match:
+            return int(match.group(1))
+
+        return None    
+
     def extract_username(self, message: str) -> str | None:
         match = re.search(r"Failed password for (\S+)", message)
         
@@ -66,8 +83,9 @@ class IngestionService:
         severity = self.normalize_severity(event_type)
         
         username = self.extract_username(message)
-        
         source_ip = self.extract_source_ip(message)
+        destination_ip = self.extract_destination_ip(message)
+        destination_port = self.extract_destination_port(message)
 
         security_event = SecurityEvent(
             organization_id=1,
@@ -84,6 +102,8 @@ class IngestionService:
             message=message,
             occurred_at=timestamp,
             source_ip=source_ip,
+            destination_ip=destination_ip,
+            destination_port=destination_port,
             username=username,
         )
 

@@ -13,6 +13,7 @@ class SecurityEventRead(BaseModel):
     event_category: str
     severity: str
     source_ip: str | None
+    destination_port: int | None
     destination_ip: str | None
     username: str | None
     message: str

@@ -1,10 +1,9 @@
 from datetime import datetime
 
-from sqlalchemy import DateTime, ForeignKey, Text
+from sqlalchemy import DateTime, ForeignKey, Integer, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
-from sqlalchemy import DateTime, ForeignKey, Integer, Text
 
 class SecurityEvent(Base):
     __tablename__ = "security_events"

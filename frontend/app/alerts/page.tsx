@@ -22,7 +22,8 @@ function formatAsset(alert: Alert) {
   if (fallbackAlert.asset_hostname) return fallbackAlert.asset_hostname;
   if (fallbackAlert.asset_ip) return fallbackAlert.asset_ip;
 
-  if (alert.asset_id) return alert.asset_id.slice(0, 8);
+  if (alert.asset_id) return String(alert.asset_id);
+  
   return "—";
 }
 
