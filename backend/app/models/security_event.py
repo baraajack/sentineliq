@@ -4,7 +4,7 @@ from sqlalchemy import DateTime, ForeignKey, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
-
+from sqlalchemy import DateTime, ForeignKey, Integer, Text
 
 class SecurityEvent(Base):
     __tablename__ = "security_events"
@@ -40,6 +40,11 @@ class SecurityEvent(Base):
 
     destination_ip: Mapped[str | None] = mapped_column(
         Text,
+        nullable=True,
+    )
+
+    destination_port: Mapped[int | None] = mapped_column(
+        Integer,
         nullable=True,
     )
 
