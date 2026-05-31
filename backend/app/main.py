@@ -1,3 +1,4 @@
+from app.api.routes.alerts import router as alerts_router
 from fastapi import FastAPI
 from app.api.routes.assets import router as assets_router
 from app.api.routes.log_sources import (
@@ -15,7 +16,7 @@ app = FastAPI(
 )
 
 app.include_router(log_sources_router)
-
+app.include_router(alerts_router)
 app.include_router(assets_router)
 
 
