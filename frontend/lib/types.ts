@@ -28,3 +28,17 @@ export type DetectionRule = {
   created_at?: string;
   updated_at?: string;
 };
+
+export type Incident = {
+  id: number;
+  organization_id: number;
+  title: string;
+  description: string;
+  severity: string;
+  status: string;
+  assigned_to_user_id?: number | null;
+  created_from_alert_id?: number | null;
+  created_at: string;
+  updated_at: string;
+  resolved_at?: string | null;
+};

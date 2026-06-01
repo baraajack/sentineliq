@@ -1,6 +1,20 @@
 import type { Alert } from "./types";
 import type { DetectionRule } from "./types";
 
+import type { Incident } from "./types";
+
+export async function getIncidents(): Promise<Incident[]> {
+  const response = await fetch(`${API_BASE_URL}/api/incidents`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch incidents");
+  }
+
+  return response.json();
+}
+
 export async function getDetectionRules(): Promise<DetectionRule[]> {
   const response = await fetch(`${API_BASE_URL}/api/detection-rules`, {
     cache: "no-store",
