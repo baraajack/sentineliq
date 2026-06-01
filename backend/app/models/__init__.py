@@ -7,3 +7,4 @@ from app.models.security_event import SecurityEvent
 from app.models.alert import Alert
 from app.models.incident import Incident
 from app.models.detection_rule import DetectionRule
+from app.models.incident_alert import IncidentAlert
