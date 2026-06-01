@@ -44,3 +44,15 @@ export async function fetchEvents() {
 
   return response.json();
 }
+
+export async function getAlert(id: string): Promise<Alert> {
+  const response = await fetch(`${API_BASE_URL}/api/alerts/${id}`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch alert");
+  }
+
+  return response.json();
+}
