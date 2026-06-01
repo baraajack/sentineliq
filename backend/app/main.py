@@ -13,10 +13,14 @@ from app.api.routes.incidents import (
     router as incidents_router,
 )
 
+from app.api.routes.ai import router as ai_router
+
 app = FastAPI(
     title="SentinelIQ API",
     version="0.1.0",
 )
+
+app.include_router(ai_router)
 
 app.include_router(log_sources_router)
 app.include_router(alerts_router)
