@@ -70,3 +70,15 @@ export async function getAlert(id: string): Promise<Alert> {
 
   return response.json();
 }
+
+export async function getIncident(id: string): Promise<Incident> {
+  const response = await fetch(`${API_BASE_URL}/api/incidents/${id}`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch incident");
+  }
+
+  return response.json();
+}
