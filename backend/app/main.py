@@ -14,10 +14,17 @@ from app.api.routes.incidents import (
 )
 
 from app.api.routes.ai import router as ai_router
-
+from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(
     title="SentinelIQ API",
     version="0.1.0",
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(ai_router)
