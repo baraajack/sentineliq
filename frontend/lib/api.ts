@@ -82,3 +82,18 @@ export async function getIncident(id: string): Promise<Incident> {
 
   return response.json();
 }
+
+export async function explainAlert(id: string) {
+  const response = await fetch(
+    `http://localhost:8000/api/ai/alerts/${id}/explain`,
+    {
+      method: "POST",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to explain alert");
+  }
+
+  return response.json();
+}

@@ -1,4 +1,6 @@
 import { getAlert } from "../../../lib/api";
+import { AlertAIPanel } from "./ai-panel";
+
 
 type PageProps = {
   params: Promise<{
@@ -62,6 +64,8 @@ export default async function AlertDetailsPage({
           </div>
         </div>
       </div>
+      <AlertAIPanel alertId={alert.id} />
     </div>
   );
 }
+
