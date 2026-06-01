@@ -41,3 +41,20 @@ class AIService:
                 "Validate affected assets.",
             ],
         )
+    
+    def generate_incident_report(self, context: dict) -> str:
+        incident = context["incident"]
+
+        return (
+            f"# Incident Report\n\n"
+            f"## Executive Summary\n"
+            f"Incident '{incident['title']}' is currently "
+            f"'{incident['status']}' with severity '{incident['severity']}'.\n\n"
+            f"## Evidence\n"
+            f"- Linked alerts: {len(context['alerts'])}\n"
+            f"- Analyst notes: {len(context['notes'])}\n\n"
+            f"## Recommendations\n"
+            f"- Review linked alerts.\n"
+            f"- Validate affected assets.\n"
+            f"- Continue analyst-led investigation.\n"
+        )
