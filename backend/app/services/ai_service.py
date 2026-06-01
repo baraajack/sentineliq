@@ -20,3 +20,24 @@ class AIService:
                 "Proceed with OpenAI integration only after context validation.",
             ],
         )
+    
+    def summarize_incident(self, context: dict) -> AIResponse:
+        incident = context["incident"]
+
+        return AIResponse(
+            summary=(
+                f"Incident '{incident['title']}' "
+                f"is currently '{incident['status']}' "
+                f"with severity '{incident['severity']}'."
+            ),
+            confidence="low",
+            evidence=[
+                f"Linked alerts: {len(context['alerts'])}",
+                f"Analyst notes: {len(context['notes'])}",
+            ],
+            recommended_actions=[
+                "Review linked alerts.",
+                "Review analyst notes.",
+                "Validate affected assets.",
+            ],
+        )

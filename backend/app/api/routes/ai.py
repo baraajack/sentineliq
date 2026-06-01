@@ -25,3 +25,21 @@ def explain_alert(
         )
 
     return AIService().explain_alert(context)
+
+@router.post("/incidents/{incident_id}/summarize")
+def summarize_incident(
+    incident_id: int,
+    db: Session = Depends(get_db),
+):
+    context = (
+        ContextBuilderService(db)
+        .build_incident_context(incident_id)
+    )
+
+    if context is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Incident not found",
+        )
+
+    return AIService().summarize_incident(context)
