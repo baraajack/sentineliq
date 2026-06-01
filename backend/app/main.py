@@ -9,6 +9,9 @@ from app.api.routes.events import router as events_router
 from app.api.routes.detection_rules import (
     router as detection_rules_router,
 )
+from app.api.routes.incidents import (
+    router as incidents_router,
+)
 
 app = FastAPI(
     title="SentinelIQ API",
@@ -18,7 +21,7 @@ app = FastAPI(
 app.include_router(log_sources_router)
 app.include_router(alerts_router)
 app.include_router(assets_router)
-
+app.include_router(incidents_router)
 
 app.include_router(ingestion_router)
 app.include_router(events_router)
