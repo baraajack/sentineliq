@@ -7,6 +7,7 @@ from app.schemas.alert import AlertRead, AlertStatusUpdate
 from app.models.incident import Incident
 from app.models.incident_alert import IncidentAlert
 from app.schemas.incident import IncidentRead
+from app.services.automation_service import AutomationService
 
 
 router = APIRouter(prefix="/api/alerts", tags=["alerts"])
@@ -93,5 +94,7 @@ def create_incident_from_alert(
     db.add(link)
     db.commit()
     db.refresh(incident)
+
+    AutomationService(db).incident_created(incident)
 
     return incident
