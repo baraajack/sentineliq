@@ -16,7 +16,7 @@ from app.api.routes.incidents import (
 from app.api.routes.ai import router as ai_router
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.routes.webhooks import router as webhooks_router
-
+from app.api.routes.soc_summary import router as soc_summary_router
 
 app = FastAPI(
     title="SentinelIQ API",
@@ -32,7 +32,7 @@ app.add_middleware(
 
 app.include_router(ai_router)
 app.include_router(webhooks_router)
-
+app.include_router(soc_summary_router)
 app.include_router(log_sources_router)
 app.include_router(alerts_router)
 app.include_router(assets_router)
