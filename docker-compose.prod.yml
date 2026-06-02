@@ -1,0 +1,61 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: sentineliq-postgres-prod
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-sentineliq}
+      POSTGRES_USER: ${POSTGRES_USER:-sentineliq}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sentineliq_password}
+    volumes:
+      - sentineliq_postgres_prod_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-sentineliq} -d ${POSTGRES_DB:-sentineliq}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7
+    container_name: sentineliq-redis-prod
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+    container_name: sentineliq-backend-prod
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://sentineliq:sentineliq_password@postgres:5432/sentineliq}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      APP_ENV: ${APP_ENV:-production}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: sentineliq-frontend-prod
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8000}
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  sentineliq_postgres_prod_data:

@@ -11,6 +11,12 @@ export type Alert = {
   first_seen_at: string;
   last_seen_at: string;
   created_at?: string;
+
+  asset?: {
+    id: number;
+    hostname?: string | null;
+    ip_address?: string | null;
+  } | null;
 };
 
 export type DetectionRule = {
