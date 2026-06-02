@@ -10,3 +10,4 @@ from app.models.detection_rule import DetectionRule
 from app.models.incident_alert import IncidentAlert
 from app.models.analyst_note import AnalystNote
 from app.models.ai_report import AIReport
+from app.models.audit_log import AuditLog
