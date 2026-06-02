@@ -85,7 +85,7 @@ export async function getIncident(id: string): Promise<Incident> {
 
 export async function explainAlert(id: string) {
   const response = await fetch(
-    `http://localhost:8000/api/ai/alerts/${id}/explain`,
+    `${API_BASE_URL}/api/ai/alerts/${id}/explain`,
     {
       method: "POST",
     }
@@ -100,7 +100,7 @@ export async function explainAlert(id: string) {
 
 export async function summarizeIncident(id: string) {
   const response = await fetch(
-    `http://localhost:8000/api/ai/incidents/${id}/summarize`,
+    `${API_BASE_URL}/api/ai/incidents/${id}/summarize`,
     { method: "POST" }
   );
 
@@ -113,7 +113,7 @@ export async function summarizeIncident(id: string) {
 
 export async function generateIncidentReport(id: string) {
   const response = await fetch(
-    `http://localhost:8000/api/ai/incidents/${id}/report`,
+    `${API_BASE_URL}/api/ai/incidents/${id}/report`,
     { method: "POST" }
   );
 
