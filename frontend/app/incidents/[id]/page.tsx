@@ -1,4 +1,5 @@
 import { getIncident } from "../../../lib/api";
+import { IncidentAIPanel } from "./ai-panel";
 
 type PageProps = {
   params: Promise<{
@@ -54,6 +55,7 @@ export default async function IncidentDetailsPage({ params }: PageProps) {
           <div><strong>Resolved:</strong> {formatDate(incident.resolved_at)}</div>
         </div>
       </section>
+      <IncidentAIPanel incidentId={incident.id} />
     </div>
   );
 }

@@ -97,3 +97,29 @@ export async function explainAlert(id: string) {
 
   return response.json();
 }
+
+export async function summarizeIncident(id: string) {
+  const response = await fetch(
+    `http://localhost:8000/api/ai/incidents/${id}/summarize`,
+    { method: "POST" }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to summarize incident");
+  }
+
+  return response.json();
+}
+
+export async function generateIncidentReport(id: string) {
+  const response = await fetch(
+    `http://localhost:8000/api/ai/incidents/${id}/report`,
+    { method: "POST" }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to generate incident report");
+  }
+
+  return response.json();
+}
