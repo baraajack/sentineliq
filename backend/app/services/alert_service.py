@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from app.models.alert import Alert
 from app.models.detection_rule import DetectionRule
 from app.models.security_event import SecurityEvent
-
+from app.services.automation_service import AutomationService
 
 ACTIVE_ALERT_STATUSES = [
     "open",
@@ -78,5 +78,7 @@ class AlertService:
         self.db.add(alert)
         self.db.commit()
         self.db.refresh(alert)
+        
+        AutomationService(self.db).auto_create_incident_for_alert(alert)
 
         return alert, True
