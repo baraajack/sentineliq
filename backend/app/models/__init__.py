@@ -11,3 +11,5 @@ from app.models.incident_alert import IncidentAlert
 from app.models.analyst_note import AnalystNote
 from app.models.ai_report import AIReport
 from app.models.audit_log import AuditLog
+from app.models.webhook import Webhook
+from app.models.webhook_delivery import WebhookDelivery
