@@ -32,6 +32,12 @@ jobs:
       - name: Validate backend imports
         run: |
           python -m py_compile app/main.py
+          
+      - name: Run backend tests
+        run: |
+          pytest  
+
+          
 
   frontend:
     name: Frontend checks
