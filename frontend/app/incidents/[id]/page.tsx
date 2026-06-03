@@ -1,4 +1,5 @@
 import { getIncident } from "../../../lib/api";
+import { Badge, normalizeBadgeTone, PageHeader, Panel } from "../../../components/ui";
 import { IncidentAIPanel } from "./ai-panel";
 
 type PageProps = {
@@ -21,41 +22,61 @@ export default async function IncidentDetailsPage({ params }: PageProps) {
   const incident = await getIncident(id);
 
   return (
-    <div>
-      <h1 style={{ margin: 0 }}>{incident.title}</h1>
-      <p style={{ color: "#64748b", marginTop: "8px" }}>
-        Incident ID: {incident.id}
-      </p>
+    <main className="page-stack">
+      <PageHeader
+        title={incident.title}
+        description={`Incident ID: ${incident.id}`}
+        meta={["Incident detail", "AI assisted"]}
+      />
 
-      <section
-        style={{
-          marginTop: "24px",
-          background: "white",
-          border: "1px solid #e2e8f0",
-          borderRadius: "12px",
-          padding: "24px",
-        }}
+      <Panel
+        title="Incident Summary"
+        description="Case context, assignment state, and response timeline."
       >
-        <h2 style={{ marginTop: 0 }}>Incident Summary</h2>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-            gap: "16px",
-          }}
-        >
-          <div><strong>Description:</strong> {incident.description}</div>
-          <div><strong>Severity:</strong> {incident.severity}</div>
-          <div><strong>Status:</strong> {incident.status}</div>
-          <div><strong>Assigned Analyst:</strong> {incident.assigned_to_user_id ?? "Unassigned"}</div>
-          <div><strong>Created From Alert:</strong> {incident.created_from_alert_id ?? "—"}</div>
-          <div><strong>Created:</strong> {formatDate(incident.created_at)}</div>
-          <div><strong>Updated:</strong> {formatDate(incident.updated_at)}</div>
-          <div><strong>Resolved:</strong> {formatDate(incident.resolved_at)}</div>
+        <div className="detail-grid">
+          <div className="detail-item">
+            <span className="detail-label">Description</span>
+            <span className="detail-value">{incident.description}</span>
+          </div>
+          <div className="detail-item">
+            <span className="detail-label">Severity</span>
+            <span className="detail-value">
+              <Badge tone={normalizeBadgeTone(incident.severity)}>
+                {incident.severity}
+              </Badge>
+            </span>
+          </div>
+          <div className="detail-item">
+            <span className="detail-label">Status</span>
+            <span className="detail-value">
+              <Badge tone={normalizeBadgeTone(incident.status)}>
+                {incident.status}
+              </Badge>
+            </span>
+          </div>
+          <div className="detail-item">
+            <span className="detail-label">Assigned Analyst</span>
+            <span className="detail-value">{incident.assigned_to_user_id ?? "Unassigned"}</span>
+          </div>
+          <div className="detail-item">
+            <span className="detail-label">Created From Alert</span>
+            <span className="detail-value mono">{incident.created_from_alert_id ?? "—"}</span>
+          </div>
+          <div className="detail-item">
+            <span className="detail-label">Created</span>
+            <span className="detail-value">{formatDate(incident.created_at)}</span>
+          </div>
+          <div className="detail-item">
+            <span className="detail-label">Updated</span>
+            <span className="detail-value">{formatDate(incident.updated_at)}</span>
+          </div>
+          <div className="detail-item">
+            <span className="detail-label">Resolved</span>
+            <span className="detail-value">{formatDate(incident.resolved_at)}</span>
+          </div>
         </div>
-      </section>
+      </Panel>
       <IncidentAIPanel incidentId={incident.id} />
-    </div>
+    </main>
   );
 }

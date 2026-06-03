@@ -1,4 +1,5 @@
 import { getAlert } from "../../../lib/api";
+import { Badge, normalizeBadgeTone, PageHeader, Panel } from "../../../components/ui";
 import { AlertAIPanel } from "./ai-panel";
 
 
@@ -14,58 +15,69 @@ export default async function AlertDetailsPage({
   const alert = await getAlert((await params).id);
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">
-          {alert.title}
-        </h1>
+    <main className="page-stack">
+      <PageHeader
+        title={alert.title}
+        description={`Alert ID: ${alert.id}`}
+        meta={["Alert detail", "AI assisted"]}
+      />
 
-        <p className="text-gray-500">
-          Alert ID: {alert.id}
-        </p>
-      </div>
-
-      <div className="rounded-lg border p-6">
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <strong>Severity:</strong> {alert.severity}
+      <Panel
+        title="Alert Summary"
+        description="Triage context, affected entity data, and occurrence window."
+      >
+        <div className="detail-grid">
+          <div className="detail-item">
+            <span className="detail-label">Severity</span>
+            <span className="detail-value">
+              <Badge tone={normalizeBadgeTone(alert.severity)}>{alert.severity}</Badge>
+            </span>
           </div>
 
-          <div>
-            <strong>Risk Score:</strong> {alert.risk_score}
+          <div className="detail-item">
+            <span className="detail-label">Risk Score</span>
+            <span className="detail-value">{alert.risk_score}</span>
           </div>
 
-          <div>
-            <strong>Status:</strong> {alert.status}
+          <div className="detail-item">
+            <span className="detail-label">Status</span>
+            <span className="detail-value">
+              <Badge tone={normalizeBadgeTone(alert.status)}>{alert.status}</Badge>
+            </span>
           </div>
 
-          <div>
-            <strong>Asset ID:</strong> {alert.asset_id}
+          <div className="detail-item">
+            <span className="detail-label">Asset ID</span>
+            <span className="detail-value mono">{alert.asset_id}</span>
           </div>
 
-          <div>
-            <strong>Source IP:</strong> {alert.source_ip ?? "-"}
+          <div className="detail-item">
+            <span className="detail-label">Source IP</span>
+            <span className="detail-value mono">{alert.source_ip ?? "-"}</span>
           </div>
 
-          <div>
-            <strong>Username:</strong> {alert.username ?? "-"}
+          <div className="detail-item">
+            <span className="detail-label">Username</span>
+            <span className="detail-value">{alert.username ?? "-"}</span>
           </div>
 
-          <div>
-            <strong>Event Count:</strong> {alert.event_count}
+          <div className="detail-item">
+            <span className="detail-label">Event Count</span>
+            <span className="detail-value">{alert.event_count}</span>
           </div>
 
-          <div>
-            <strong>First Seen:</strong> {alert.first_seen_at}
+          <div className="detail-item">
+            <span className="detail-label">First Seen</span>
+            <span className="detail-value">{alert.first_seen_at}</span>
           </div>
 
-          <div>
-            <strong>Last Seen:</strong> {alert.last_seen_at}
+          <div className="detail-item">
+            <span className="detail-label">Last Seen</span>
+            <span className="detail-value">{alert.last_seen_at}</span>
           </div>
         </div>
-      </div>
+      </Panel>
       <AlertAIPanel alertId={alert.id} />
-    </div>
+    </main>
   );
 }
-

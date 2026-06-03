@@ -1,4 +1,5 @@
 import { fetchAssets, fetchEvents } from "../../lib/api";
+import { Badge, EmptyState, MetricCard, normalizeBadgeTone, PageHeader, Panel } from "../../components/ui";
 
 export default async function DashboardPage() {
   const assets = await fetchAssets();
@@ -10,123 +11,94 @@ export default async function DashboardPage() {
     {
       label: "Total Assets",
       value: assets.length,
+      caption: "Tracked infrastructure inventory",
     },
     {
       label: "Total Events",
       value: events.length,
+      caption: "Normalized security telemetry",
     },
     {
       label: "Open Alerts",
       value: 0,
+      caption: "Awaiting analyst triage",
     },
     {
       label: "Open Incidents",
       value: 0,
+      caption: "Active investigation cases",
     },
   ];
 
   return (
-    <div>
-      <h1>Dashboard</h1>
+    <main className="page-stack">
+      <PageHeader
+        title="Security Operations Dashboard"
+        description="Monitor the current state of telemetry, asset coverage, and investigation workload from one SOC command surface."
+        meta={["Live view", "Normalized events", "Risk aligned"]}
+      />
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: "16px",
-          marginBottom: "32px",
-        }}
-      >
+      <div className="metric-grid">
         {cards.map((card) => (
-          <div
+          <MetricCard
             key={card.label}
-            style={{
-              background: "white",
-              padding: "20px",
-              borderRadius: "12px",
-              border: "1px solid #e2e8f0",
-            }}
-          >
-            <div>{card.label}</div>
-            <div
-              style={{
-                fontSize: "32px",
-                fontWeight: 700,
-                marginTop: "8px",
-              }}
-            >
-              {card.value}
-            </div>
-          </div>
+            label={card.label}
+            value={card.value}
+            caption={card.caption}
+          />
         ))}
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr",
-          gap: "24px",
-        }}
-      >
-        <section
-          style={{
-            background: "white",
-            padding: "20px",
-            borderRadius: "12px",
-            border: "1px solid #e2e8f0",
-          }}
+      <div className="content-grid">
+        <Panel
+          title="Recent Security Events"
+          description="Latest normalized events available for detection and correlation."
         >
-          <h2>Recent Security Events</h2>
-
-          <table style={{ width: "100%" }}>
-            <thead>
-              <tr>
-                <th align="left">Type</th>
-                <th align="left">Severity</th>
-                <th align="left">Source IP</th>
-                <th align="left">Username</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {recentEvents.map((event: any) => (
-                <tr key={event.id}>
-                  <td>{event.event_type}</td>
-                  <td>{event.severity}</td>
-                  <td>{event.source_ip ?? "-"}</td>
-                  <td>{event.username ?? "-"}</td>
+          <div className="table-wrap">
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Severity</th>
+                  <th>Source IP</th>
+                  <th>Username</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
+              </thead>
 
-        <section
-          style={{
-            background: "white",
-            padding: "20px",
-            borderRadius: "12px",
-            border: "1px solid #e2e8f0",
-          }}
-        >
-          <h2>Recent Alerts</h2>
+              <tbody>
+                {recentEvents.map((event: any) => (
+                  <tr key={event.id}>
+                    <td className="cell-title">{event.event_type}</td>
+                    <td>
+                      <Badge tone={normalizeBadgeTone(event.severity)}>
+                        {event.severity}
+                      </Badge>
+                    </td>
+                    <td className="mono">{event.source_ip ?? "-"}</td>
+                    <td>{event.username ?? "-"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Panel>
 
-          <p>No alerts available yet.</p>
-        </section>
+        <div className="page-stack">
+          <Panel
+            title="Alert Readiness"
+            description="No generated alerts are available yet."
+          >
+            <EmptyState>No alerts available yet.</EmptyState>
+          </Panel>
 
-        <section
-          style={{
-            background: "white",
-            padding: "20px",
-            borderRadius: "12px",
-            border: "1px solid #e2e8f0",
-          }}
-        >
-          <h2>Recent Incidents</h2>
-
-          <p>No incidents available yet.</p>
-        </section>
+          <Panel
+            title="Incident Activity"
+            description="No incident cases have been opened."
+          >
+            <EmptyState>No incidents available yet.</EmptyState>
+          </Panel>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }

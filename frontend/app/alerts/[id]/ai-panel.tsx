@@ -19,37 +19,44 @@ export function AlertAIPanel({ alertId }: { alertId: number }) {
   }
 
   return (
-    <section style={{
-      marginTop: "24px",
-      background: "white",
-      border: "1px solid #e2e8f0",
-      borderRadius: "12px",
-      padding: "24px",
-    }}>
-      <h2 style={{ marginTop: 0 }}>AI Analyst</h2>
+    <section className="panel">
+      <div className="panel-header">
+        <div>
+          <h2 className="panel-title">AI Analyst</h2>
+          <p className="panel-description">
+            Generate analyst-ready explanation, evidence, and response guidance.
+          </p>
+        </div>
+      </div>
 
-      <button onClick={handleExplain} disabled={loading}>
-        {loading ? "Generating..." : "Explain with AI"}
-      </button>
+      <div className="action-row">
+        <button className="button" onClick={handleExplain} disabled={loading}>
+          {loading ? "Generating..." : "Explain with AI"}
+        </button>
+      </div>
 
       {result && (
-        <div style={{ marginTop: "16px" }}>
+        <div className="ai-result">
           <p><strong>Summary:</strong> {result.summary}</p>
           <p><strong>Confidence:</strong> {result.confidence}</p>
 
-          <strong>Evidence:</strong>
-          <ul>
-            {result.evidence.map((item: string) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
+          <div>
+            <strong>Evidence:</strong>
+            <ul>
+              {result.evidence.map((item: string) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
 
-          <strong>Recommended Actions:</strong>
-          <ul>
-            {result.recommended_actions.map((item: string) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
+          <div>
+            <strong>Recommended Actions:</strong>
+            <ul>
+              {result.recommended_actions.map((item: string) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       )}
     </section>

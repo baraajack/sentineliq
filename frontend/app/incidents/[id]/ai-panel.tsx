@@ -35,65 +35,58 @@ export function IncidentAIPanel({ incidentId }: { incidentId: number }) {
   }
 
   return (
-    <section
-      style={{
-        marginTop: "24px",
-        background: "white",
-        border: "1px solid #e2e8f0",
-        borderRadius: "12px",
-        padding: "24px",
-      }}
-    >
-      <h2 style={{ marginTop: 0 }}>AI Analyst</h2>
+    <section className="panel">
+      <div className="panel-header">
+        <div>
+          <h2 className="panel-title">AI Analyst</h2>
+          <p className="panel-description">
+            Summarize case context or generate a structured incident report.
+          </p>
+        </div>
+      </div>
 
-      <div style={{ display: "flex", gap: "12px" }}>
-        <button onClick={handleSummarize} disabled={loadingSummary}>
+      <div className="action-row">
+        <button className="button" onClick={handleSummarize} disabled={loadingSummary}>
           {loadingSummary ? "Generating..." : "Summarize Incident"}
         </button>
 
-        <button onClick={handleGenerateReport} disabled={loadingReport}>
+        <button className="button" onClick={handleGenerateReport} disabled={loadingReport}>
           {loadingReport ? "Generating..." : "Generate Report"}
         </button>
       </div>
 
       {summary && (
-        <div style={{ marginTop: "16px" }}>
+        <div className="ai-result">
           <h3>AI Summary</h3>
           <p><strong>Summary:</strong> {summary.summary}</p>
           <p><strong>Confidence:</strong> {summary.confidence}</p>
 
-          <strong>Evidence:</strong>
-          <ul>
-            {summary.evidence.map((item: string) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
+          <div>
+            <strong>Evidence:</strong>
+            <ul>
+              {summary.evidence.map((item: string) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
 
-          <strong>Recommended Actions:</strong>
-          <ul>
-            {summary.recommended_actions.map((item: string) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
+          <div>
+            <strong>Recommended Actions:</strong>
+            <ul>
+              {summary.recommended_actions.map((item: string) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       )}
 
       {report && (
-        <div style={{ marginTop: "16px" }}>
+        <div className="ai-result">
           <h3>Incident Report</h3>
           <p><strong>Report ID:</strong> {report.id}</p>
           <p><strong>Model:</strong> {report.model_name}</p>
-          <pre
-            style={{
-              whiteSpace: "pre-wrap",
-              background: "#f8fafc",
-              border: "1px solid #e2e8f0",
-              borderRadius: "8px",
-              padding: "16px",
-            }}
-          >
-            {report.content}
-          </pre>
+          <pre className="report-block">{report.content}</pre>
         </div>
       )}
     </section>
