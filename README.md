@@ -290,3 +290,45 @@ It demonstrates:
 * SOAR-lite automation
 * Backend architecture
 * Production-readiness practices
+
+
+
+
+
+## Screenshots
+
+### Home
+
+![Home](docs/screenshots/home.png)
+
+### Dashboard
+
+![Dashboard](docs/screenshots/dashboard.png)
+
+### Assets
+
+![Assets](docs/screenshots/assets.png)
+
+### Events
+
+![Events](docs/screenshots/events.png)
+
+### Alerts
+
+![Alerts](docs/screenshots/alerts.png)
+
+### Alert Investigation
+
+![Alert Detail](docs/screenshots/alert-detail.png)
+
+### Incidents
+
+![Incidents](docs/screenshots/incidents.png)
+
+### Incident Investigation
+
+![Incident Detail](docs/screenshots/incident-detail.png)
+
+### Detection Rules
+
+![Detection Rules](docs/screenshots/detection-rules.png)
