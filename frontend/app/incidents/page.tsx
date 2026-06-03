@@ -1,5 +1,5 @@
 import { getIncidents } from "../../lib/api";
-import { Badge, EmptyState, normalizeBadgeTone, PageHeader, Panel } from "../../components/ui";
+import { Badge, EmptyState, InfoCard, normalizeBadgeTone, PageHeader, Panel } from "../../components/ui";
 
 function formatDate(value?: string | null) {
   if (!value) return "—";
@@ -39,7 +39,12 @@ export default async function IncidentsPage() {
               {incidents.length === 0 ? (
                 <tr>
                   <td colSpan={6}>
-                    <EmptyState>No incidents found.</EmptyState>
+                    <EmptyState>
+                      <div>
+                        <strong>No incidents available yet.</strong>
+                        <p>Create incidents from alerts to begin investigation and report generation.</p>
+                      </div>
+                    </EmptyState>
                   </td>
                 </tr>
               ) : (
@@ -82,6 +87,24 @@ export default async function IncidentsPage() {
           </table>
         </div>
       </Panel>
+
+      <div className="overview-grid">
+        <InfoCard
+          description="Use incident status, severity, and assignment context to keep response work visible."
+          label="Response"
+          title="Investigation workflow"
+        />
+        <InfoCard
+          description="Incident details include AI summarization and structured report generation from existing case context."
+          label="AI"
+          title="Incident report generation"
+        />
+        <InfoCard
+          description="Escalate from alert review into an incident when evidence requires ownership, tracking, or reporting."
+          label="Next"
+          title="Case readiness"
+        />
+      </div>
     </main>
   );
 }

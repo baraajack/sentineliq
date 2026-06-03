@@ -1,5 +1,5 @@
 import { getDetectionRules } from "../../lib/api";
-import { Badge, EmptyState, normalizeBadgeTone, PageHeader, Panel } from "../../components/ui";
+import { Badge, EmptyState, InfoCard, normalizeBadgeTone, PageHeader, Panel } from "../../components/ui";
 
 export default async function DetectionRulesPage() {
   const rules = await getDetectionRules();
@@ -39,7 +39,12 @@ export default async function DetectionRulesPage() {
               {rules.length === 0 ? (
                 <tr>
                   <td colSpan={8}>
-                    <EmptyState>No detection rules found.</EmptyState>
+                    <EmptyState>
+                      <div>
+                        <strong>No detection rules available yet.</strong>
+                        <p>Create rules to turn normalized events into prioritized alerts.</p>
+                      </div>
+                    </EmptyState>
                   </td>
                 </tr>
               ) : (
@@ -82,6 +87,24 @@ export default async function DetectionRulesPage() {
           </table>
         </div>
       </Panel>
+
+      <div className="overview-grid">
+        <InfoCard
+          description="Enabled rules evaluate normalized event fields and thresholds during ingestion."
+          label="Detection"
+          title="Automated evaluation"
+        />
+        <InfoCard
+          description="Risk score and severity help analysts understand alert priority before investigation."
+          label="Priority"
+          title="Risk alignment"
+        />
+        <InfoCard
+          description="Rule keys and windows keep detection behavior traceable during SOC review."
+          label="Audit"
+          title="Operational context"
+        />
+      </div>
     </main>
   );
 }

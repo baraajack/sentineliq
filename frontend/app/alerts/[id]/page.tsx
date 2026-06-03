@@ -1,5 +1,5 @@
 import { getAlert } from "../../../lib/api";
-import { Badge, normalizeBadgeTone, PageHeader, Panel } from "../../../components/ui";
+import { Badge, InfoCard, normalizeBadgeTone, PageHeader, Panel } from "../../../components/ui";
 import { AlertAIPanel } from "./ai-panel";
 
 
@@ -77,6 +77,25 @@ export default async function AlertDetailsPage({
           </div>
         </div>
       </Panel>
+
+      <div className="overview-grid">
+        <InfoCard
+          description="Use severity, risk score, source IP, and identity context to validate alert priority."
+          label="Triage"
+          title="Alert review"
+        />
+        <InfoCard
+          description="Generate an explanation, evidence summary, and recommended response actions from this alert."
+          label="AI"
+          title="AI-assisted triage"
+        />
+        <InfoCard
+          description="Promote confirmed malicious activity into an incident when ownership and reporting are required."
+          label="Workflow"
+          title="Investigation path"
+        />
+      </div>
+
       <AlertAIPanel alertId={alert.id} />
     </main>
   );

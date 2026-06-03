@@ -1,5 +1,5 @@
 import { fetchAssets } from "../../lib/api";
-import { Badge, EmptyState, normalizeBadgeTone, PageHeader, Panel } from "../../components/ui";
+import { Badge, EmptyState, InfoCard, normalizeBadgeTone, PageHeader, Panel } from "../../components/ui";
 
 export default async function AssetsPage() {
   const assets = await fetchAssets();
@@ -31,7 +31,12 @@ export default async function AssetsPage() {
               {assets.length === 0 ? (
                 <tr>
                   <td colSpan={5}>
-                    <EmptyState>No assets found.</EmptyState>
+                    <EmptyState>
+                      <div>
+                        <strong>No assets available yet.</strong>
+                        <p>Add inventory records to give alerts host, ownership, and criticality context.</p>
+                      </div>
+                    </EmptyState>
                   </td>
                 </tr>
               ) : (
@@ -53,6 +58,24 @@ export default async function AssetsPage() {
           </table>
         </div>
       </Panel>
+
+      <div className="overview-grid">
+        <InfoCard
+          description="Asset criticality helps prioritize alert triage and incident response."
+          label="Context"
+          title="Business impact"
+        />
+        <InfoCard
+          description="Owner and host data make investigation handoffs clearer for analysts."
+          label="SOC"
+          title="Ownership mapping"
+        />
+        <InfoCard
+          description="Security events and alerts become more useful when they map to known infrastructure."
+          label="Data"
+          title="Detection enrichment"
+        />
+      </div>
     </main>
   );
 }

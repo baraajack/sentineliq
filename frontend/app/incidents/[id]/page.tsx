@@ -1,5 +1,5 @@
 import { getIncident } from "../../../lib/api";
-import { Badge, normalizeBadgeTone, PageHeader, Panel } from "../../../components/ui";
+import { Badge, InfoCard, normalizeBadgeTone, PageHeader, Panel } from "../../../components/ui";
 import { IncidentAIPanel } from "./ai-panel";
 
 type PageProps = {
@@ -76,6 +76,25 @@ export default async function IncidentDetailsPage({ params }: PageProps) {
           </div>
         </div>
       </Panel>
+
+      <div className="overview-grid">
+        <InfoCard
+          description="Review severity, assignment, source alert, and response timeline before summarizing the case."
+          label="Case"
+          title="Investigation context"
+        />
+        <InfoCard
+          description="Generate concise case summaries for analyst handoff and response alignment."
+          label="AI"
+          title="Analyst recommendations"
+        />
+        <InfoCard
+          description="Produce a structured incident report from the current case without changing incident state."
+          label="Report"
+          title="Incident report generation"
+        />
+      </div>
+
       <IncidentAIPanel incidentId={incident.id} />
     </main>
   );

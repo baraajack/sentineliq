@@ -1,5 +1,5 @@
-import Link from "next/link";
-import "./globals.css";
+import { GlobalStyles } from "./global-styles";
+import { NavLinks } from "./nav-links";
 
 export default function RootLayout({
   children,
@@ -9,6 +9,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <GlobalStyles />
         <div className="app-shell">
           <aside className="sidebar">
             <div className="brand">
@@ -19,26 +20,7 @@ export default function RootLayout({
               </div>
             </div>
 
-            <nav className="nav" aria-label="Primary navigation">
-              <Link className="nav-link" href="/dashboard">
-                Dashboard
-              </Link>
-              <Link className="nav-link" href="/assets">
-                Assets
-              </Link>
-              <Link className="nav-link" href="/events">
-                Events
-              </Link>
-              <Link className="nav-link" href="/alerts">
-                Alerts
-              </Link>
-              <Link className="nav-link" href="/incidents">
-                Incidents
-              </Link>
-              <Link className="nav-link" href="/detection-rules">
-                Detection Rules
-              </Link>
-            </nav>
+            <NavLinks />
 
             <div className="sidebar-status">
               <p className="sidebar-status-label">Platform Status</p>

@@ -1,5 +1,5 @@
 import { fetchEvents } from "../../lib/api";
-import { Badge, EmptyState, normalizeBadgeTone, PageHeader, Panel } from "../../components/ui";
+import { Badge, EmptyState, InfoCard, normalizeBadgeTone, PageHeader, Panel } from "../../components/ui";
 
 export default async function EventsPage() {
   const events = await fetchEvents();
@@ -32,7 +32,12 @@ export default async function EventsPage() {
               {events.length === 0 ? (
                 <tr>
                   <td colSpan={6}>
-                    <EmptyState>No events found.</EmptyState>
+                    <EmptyState>
+                      <div>
+                        <strong>No events available yet.</strong>
+                        <p>Ingest logs to generate normalized security events for detection rules.</p>
+                      </div>
+                    </EmptyState>
                   </td>
                 </tr>
               ) : (
@@ -55,6 +60,24 @@ export default async function EventsPage() {
           </table>
         </div>
       </Panel>
+
+      <div className="overview-grid">
+        <InfoCard
+          description="Events provide normalized source IP, identity, severity, and category fields for downstream detection."
+          label="Telemetry"
+          title="Normalized signal"
+        />
+        <InfoCard
+          description="Detection rules evaluate event patterns and convert suspicious activity into alert context."
+          label="Rules"
+          title="Detection input"
+        />
+        <InfoCard
+          description="Clean event data improves the quality of AI summaries, recommendations, and incident reports."
+          label="AI"
+          title="Analyst context"
+        />
+      </div>
     </main>
   );
 }

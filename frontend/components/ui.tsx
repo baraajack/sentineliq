@@ -33,11 +33,12 @@ type MetricCardProps = {
   label: string;
   value: string | number;
   caption?: string;
+  tone?: "default" | "accent" | "success" | "warning" | "danger";
 };
 
-export function MetricCard({ label, value, caption }: MetricCardProps) {
+export function MetricCard({ label, value, caption, tone = "default" }: MetricCardProps) {
   return (
-    <article className="metric-card">
+    <article className={`metric-card metric-card-${tone}`}>
       <p className="metric-label">{label}</p>
       <p className="metric-value">{value}</p>
       {caption ? <p className="metric-caption">{caption}</p> : null}
@@ -69,6 +70,49 @@ export function Panel({ title, description, action, children }: PanelProps) {
 
 export function EmptyState({ children }: { children: ReactNode }) {
   return <div className="empty-state">{children}</div>;
+}
+
+type InfoCardProps = {
+  title: string;
+  description: string;
+  label?: string;
+  children?: ReactNode;
+};
+
+export function InfoCard({ title, description, label, children }: InfoCardProps) {
+  return (
+    <article className="info-card">
+      {label ? <span className="info-card-label">{label}</span> : null}
+      <h3 className="info-card-title">{title}</h3>
+      <p className="info-card-description">{description}</p>
+      {children}
+    </article>
+  );
+}
+
+export function ProgressRow({
+  label,
+  value,
+  detail,
+}: {
+  label: string;
+  value: number;
+  detail?: string;
+}) {
+  const boundedValue = Math.max(0, Math.min(100, value));
+
+  return (
+    <div className="progress-row">
+      <div className="progress-row-header">
+        <span>{label}</span>
+        <strong>{boundedValue}%</strong>
+      </div>
+      <div className="progress-track" aria-hidden="true">
+        <span style={{ width: `${boundedValue}%` }} />
+      </div>
+      {detail ? <p className="progress-detail">{detail}</p> : null}
+    </div>
+  );
 }
 
 type BadgeTone =

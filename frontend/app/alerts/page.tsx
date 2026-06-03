@@ -1,6 +1,6 @@
 import { getAlerts } from "../../lib/api";
 import type { Alert } from "../../lib/types";
-import { Badge, EmptyState, normalizeBadgeTone, PageHeader, Panel } from "../../components/ui";
+import { Badge, EmptyState, InfoCard, normalizeBadgeTone, PageHeader, Panel } from "../../components/ui";
 
 function formatDate(value?: string | null) {
   if (!value) return "—";
@@ -64,7 +64,12 @@ export default async function AlertsPage() {
               {alerts.length === 0 ? (
                 <tr>
                   <td colSpan={10}>
-                    <EmptyState>No alerts found.</EmptyState>
+                    <EmptyState>
+                      <div>
+                        <strong>No alerts available yet.</strong>
+                        <p>Ingest logs to generate detection alerts for AI-assisted triage.</p>
+                      </div>
+                    </EmptyState>
                   </td>
                 </tr>
               ) : (
@@ -116,6 +121,24 @@ export default async function AlertsPage() {
           </table>
         </div>
       </Panel>
+
+      <div className="overview-grid">
+        <InfoCard
+          description="Review severity, source IP, identity, asset, and event count before escalating into incident response."
+          label="Triage"
+          title="AI-assisted triage"
+        />
+        <InfoCard
+          description="Open an alert detail page to generate analyst recommendations without changing alert state."
+          label="AI"
+          title="Analyst recommendations"
+        />
+        <InfoCard
+          description="Promote confirmed alerts into incidents when investigation ownership or reporting is required."
+          label="Workflow"
+          title="Next action"
+        />
+      </div>
     </main>
   );
 }

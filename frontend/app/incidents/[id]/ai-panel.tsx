@@ -35,13 +35,30 @@ export function IncidentAIPanel({ incidentId }: { incidentId: number }) {
   }
 
   return (
-    <section className="panel">
+    <section className="panel ai-panel">
       <div className="panel-header">
         <div>
-          <h2 className="panel-title">AI Analyst</h2>
+          <p className="eyebrow">AI Analyst</p>
+          <h2 className="panel-title">AI incident analysis</h2>
           <p className="panel-description">
             Summarize case context or generate a structured incident report.
           </p>
+        </div>
+        <span className="system-pill">Report ready</span>
+      </div>
+
+      <div className="ai-card-grid">
+        <div className="ai-chip">
+          <p className="ai-chip-title">Case summary</p>
+          <p className="ai-chip-detail">Condenses investigation context for handoff.</p>
+        </div>
+        <div className="ai-chip">
+          <p className="ai-chip-title">Analyst recommendations</p>
+          <p className="ai-chip-detail">Surfaces response actions from case evidence.</p>
+        </div>
+        <div className="ai-chip">
+          <p className="ai-chip-title">Incident report generation</p>
+          <p className="ai-chip-detail">Creates a structured report from existing data.</p>
         </div>
       </div>
 

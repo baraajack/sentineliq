@@ -19,13 +19,30 @@ export function AlertAIPanel({ alertId }: { alertId: number }) {
   }
 
   return (
-    <section className="panel">
+    <section className="panel ai-panel">
       <div className="panel-header">
         <div>
-          <h2 className="panel-title">AI Analyst</h2>
+          <p className="eyebrow">AI Analyst</p>
+          <h2 className="panel-title">AI-assisted alert triage</h2>
           <p className="panel-description">
             Generate analyst-ready explanation, evidence, and response guidance.
           </p>
+        </div>
+        <span className="system-pill">Recommendations</span>
+      </div>
+
+      <div className="ai-card-grid">
+        <div className="ai-chip">
+          <p className="ai-chip-title">Alert explanation</p>
+          <p className="ai-chip-detail">Summarizes why the detection matters.</p>
+        </div>
+        <div className="ai-chip">
+          <p className="ai-chip-title">Evidence review</p>
+          <p className="ai-chip-detail">Highlights supporting observables.</p>
+        </div>
+        <div className="ai-chip">
+          <p className="ai-chip-title">Response guidance</p>
+          <p className="ai-chip-detail">Returns analyst recommendations.</p>
         </div>
       </div>
 
