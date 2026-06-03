@@ -1,5 +1,6 @@
 import { GlobalStyles } from "./global-styles";
 import { NavLinks } from "./nav-links";
+import Link from "next/link";
 
 export default function RootLayout({
   children,
@@ -12,13 +13,13 @@ export default function RootLayout({
         <GlobalStyles />
         <div className="app-shell">
           <aside className="sidebar">
-            <div className="brand">
+            <Link href="/" className="brand">
               <div className="brand-mark">SIQ</div>
               <div>
                 <p className="brand-title">SentinelIQ</p>
                 <p className="brand-subtitle">SOC Analyst Platform</p>
               </div>
-            </div>
+            </Link>
 
             <NavLinks />
 

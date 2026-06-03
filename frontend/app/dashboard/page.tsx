@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { fetchAssets, fetchEvents } from "../../lib/api";
 import {
   Badge,
@@ -80,6 +82,33 @@ export default async function DashboardPage() {
     },
   ];
 
+  const socActions = [
+    {
+      label: "Open Alerts",
+      href: "/alerts",
+      description: "Review detection alerts awaiting analyst triage.",
+      action: "Open alerts",
+    },
+    {
+      label: "Open Incidents",
+      href: "/incidents",
+      description: "Move into active investigation cases and response tracking.",
+      action: "Open incidents",
+    },
+    {
+      label: "View Events",
+      href: "/events",
+      description: "Inspect normalized telemetry available for detection review.",
+      action: "View events",
+    },
+    {
+      label: "Review Detection Rules",
+      href: "/detection-rules",
+      description: "Review rule coverage that evaluates incoming security events.",
+      action: "Review rules",
+    },
+  ];
+
   return (
     <main className="page-stack">
       <PageHeader
@@ -109,6 +138,24 @@ export default async function DashboardPage() {
           />
         ))}
       </div>
+
+      <Panel
+        title="SOC Actions"
+        description="Jump directly to the operational pages used during monitoring, triage, and investigation."
+      >
+        <div className="quick-grid">
+          {socActions.map((action) => (
+            <Link className="quick-link-card" href={action.href} key={action.href}>
+              <div>
+                <span className="info-card-label">Operational link</span>
+                <h3 className="quick-link-title">{action.label}</h3>
+                <p className="quick-link-description">{action.description}</p>
+              </div>
+              <span className="quick-link-footer">{action.action}</span>
+            </Link>
+          ))}
+        </div>
+      </Panel>
 
       <div className="content-grid">
         <Panel

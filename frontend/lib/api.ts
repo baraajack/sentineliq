@@ -28,8 +28,9 @@ export async function getDetectionRules(): Promise<DetectionRule[]> {
 }
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://backend:8000";
-
+  typeof window === "undefined"
+    ? process.env.INTERNAL_API_BASE_URL ?? "http://backend:8000"
+    : process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
 
 export async function getAlerts(): Promise<Alert[]> {
   const response = await fetch(`${API_BASE_URL}/api/alerts`, {

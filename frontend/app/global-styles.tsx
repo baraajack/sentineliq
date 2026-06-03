@@ -593,11 +593,25 @@ select {
 }
 
 .cell-title {
+  display: block;
   max-width: 360px;
   color: #f1f5f9;
   font-weight: 750;
   line-height: 1.45;
   overflow-wrap: anywhere;
+}
+
+.cell-title-link {
+  cursor: pointer;
+  transition: color 160ms ease, text-decoration-color 160ms ease;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+}
+
+.cell-title-link:hover {
+  color: var(--accent-strong);
+  text-decoration-color: rgba(34, 211, 238, 0.72);
 }
 
 .cell-description {

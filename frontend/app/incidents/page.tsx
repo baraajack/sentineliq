@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getIncidents } from "../../lib/api";
 import { Badge, EmptyState, InfoCard, normalizeBadgeTone, PageHeader, Panel } from "../../components/ui";
 
@@ -51,7 +52,9 @@ export default async function IncidentsPage() {
                 incidents.map((incident) => (
                   <tr key={incident.id}>
                     <td>
-                      <div className="cell-title">{incident.title}</div>
+                      <Link className="cell-title cell-title-link" href={`/incidents/${incident.id}`}>
+                        {incident.title}
+                      </Link>
                       <div className="cell-description">
                         {incident.description}
                       </div>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getAlerts } from "../../lib/api";
 import type { Alert } from "../../lib/types";
 import { Badge, EmptyState, InfoCard, normalizeBadgeTone, PageHeader, Panel } from "../../components/ui";
@@ -75,8 +76,10 @@ export default async function AlertsPage() {
               ) : (
                 alerts.map((alert) => (
                   <tr key={alert.id}>
-                    <td className="cell-title">
-                      {alert.title}
+                    <td>
+                      <Link className="cell-title cell-title-link" href={`/alerts/${alert.id}`}>
+                        {alert.title}
+                      </Link>
                     </td>
 
                     <td>
