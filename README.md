@@ -58,6 +58,92 @@ Phase 6 ✅ Production Readiness
 </p>
 ---
 
+
+## Platform Screenshots
+
+### Dashboard
+
+<p align="center">
+  <img src="docs/screenshots/home.png" width="1000">
+</p>
+
+---
+
+### Asset Inventory
+
+<p align="center">
+  <img src="docs/screenshots/assets.png" width="1000">
+</p>
+
+---
+
+### Security Events
+
+<p align="center">
+  <img src="docs/screenshots/events.png" width="1000">
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/securityevents.png" width="1000">
+</p>
+
+---
+
+### Detection Rules
+
+<p align="center">
+  <img src="docs/screenshots/detection-rules.png" width="1000">
+</p>
+
+---
+
+### Alert Queue
+
+<p align="center">
+  <img src="docs/screenshots/alerts.png" width="1000">
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/alerts1.png" width="1000">
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/alerts2.png" width="1000">
+</p>
+
+---
+
+### Alert Investigation
+
+<p align="center">
+  <img src="docs/screenshots/alerts-detail.png" width="1000">
+</p>
+
+---
+
+### Incident Management
+
+<p align="center">
+  <img src="docs/screenshots/incidents.png" width="1000">
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/incident1.png" width="1000">
+</p>
+
+---
+
+### Incident Investigation
+
+<p align="center">
+  <img src="docs/screenshots/incident-detail.png" width="1000">
+</p>
+
+
+
+
+
+
 ## Features
 
 ### SOC Core
@@ -306,44 +392,3 @@ It demonstrates:
 * Backend architecture
 * Production-readiness practices
 
-
-
-
-
-## Screenshots
-
-### Home
-
-![Home](docs/screenshots/home.png)
-
-### Dashboard
-
-![Dashboard](docs/screenshots/dashboard.png)
-
-### Assets
-
-![Assets](docs/screenshots/assets.png)
-
-### Events
-
-![Events](docs/screenshots/events.png)
-
-### Alerts
-
-![Alerts](docs/screenshots/alerts.png)
-
-### Alert Investigation
-
-![Alert Detail](docs/screenshots/alert-detail.png)
-
-### Incidents
-
-![Incidents](docs/screenshots/incidents.png)
-
-### Incident Investigation
-
-![Incident Detail](docs/screenshots/incident-detail.png)
-
-### Detection Rules
-
-![Detection Rules](docs/screenshots/detection-rules.png)
