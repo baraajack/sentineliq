@@ -1,3 +1,22 @@
+## Project Status
+
+🚧 Active Development
+
+Completed:
+- SOC Core
+- Detection Engine
+- Investigation Workspace
+- AI Analyst
+- Automation Foundation
+
+In Progress:
+- Production Hardening
+- RBAC
+- Rate Limiting
+- Observability
+
+
+
 # SentinelIQ
 
 SentinelIQ is an AI-assisted SOC and SOAR-lite platform built to demonstrate modern security platform engineering.
