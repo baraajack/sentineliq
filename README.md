@@ -36,6 +36,26 @@ Phase 5 ✅ Automation
 Phase 6 ✅ Production Readiness
 ```
 
+## SOC Workflow
+
+<h2>SOC Workflow</h2>
+
+<p align="center">
+  <a href="docs/screenshots/SOC%20Workflow.png">
+    <img src="docs/screenshots/SOC%20Workflow.png" width="700">
+  </a>
+</p>
+
+
+## System Architecture
+
+<h2>System Architecture</h2>
+
+<p align="center">
+  <a href="docs/screenshots/System%20Architecture.png">
+    <img src="docs/screenshots/System%20Architecture.png" width="900">
+  </a>
+</p>
 ---
 
 ## Features
@@ -95,30 +115,6 @@ Phase 6 ✅ Production Readiness
 * Secrets hygiene baseline
 
 ---
-
-## Architecture
-
-```text
-Raw Logs
-   ↓
-Normalized Security Events
-   ↓
-Detection Rules
-   ↓
-Alerts
-   ↓
-Incidents
-   ↓
-Investigation Timeline
-   ↓
-AI Analysis
-   ↓
-AI Reports
-   ↓
-Automation
-   ↓
-Webhooks / n8n
-```
 
 Frontend:
 
