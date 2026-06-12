@@ -36,7 +36,7 @@ Phase 5 ✅ Automation
 Phase 6 ✅ Production Readiness
 ```
 
-## SOC Workflow
+
 
 <h2>SOC Workflow</h2>
 
@@ -47,7 +47,7 @@ Phase 6 ✅ Production Readiness
 </p>
 
 
-## System Architecture
+
 
 <h2>System Architecture</h2>
 
