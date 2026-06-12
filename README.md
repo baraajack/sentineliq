@@ -374,8 +374,10 @@ Planned improvements:
 * Prometheus metrics
 * Expanded integration tests
 * Deployment guide for cloud hosting
-* Architecture diagram image
-* Demo seed data
+* Expanded integration tests
+* Cloud deployment guide
+* Additional detection rules
+* Extended demo dataset
 
 ---
 
